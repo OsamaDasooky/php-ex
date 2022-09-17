@@ -1,4 +1,91 @@
 <!DOCTYPE html>
+
+<head>
+    <title> simple calculator</title>
+</head>
+<?php
+    $CalculatorResult = "";
+if(isset($_POST['FirstNumber']) || isset($_POST['SecondNumber']) || isset($_POST['operator'])){
+    $FirstNumber = $_POST['FirstNumber'];
+    $SecondNumber = $_POST['SecondNumber'];
+    $operator = $_POST['operator'];
+
+if (is_numeric($FirstNumber) && is_numeric($SecondNumber)) {
+    
+    switch ($operator) {
+        case "Sum":
+            $CalculatorResult = $FirstNumber + $SecondNumber;
+            break;
+        case "Subtraction":
+            $CalculatorResult = $FirstNumber - $SecondNumber;
+            break;
+        case "Multiplication":
+            $CalculatorResult = $FirstNumber * $SecondNumber;
+            break;
+        case "Division":
+            $CalculatorResult = $FirstNumber / $SecondNumber;
+    }
+}
+}
+?>
+
+<body>
+    <div id="page-wrap">
+        <h1>PHP - Simple Calculator Program</h1>
+        <form action="" method="post" id="quiz-form">
+            <p>
+                <input type="number" name="FirstNumber" id="FirstNumber" required="required" value="<?php echo $FirstNumber  ?>" /> <b>First Number</b>
+            </p>
+            <p>
+                <input type="number" name="SecondNumber" id="SecondNumber" required="required" value="<?php echo $SecondNumber; ?>" /> <b>Second Number</b>
+            </p>
+            <p>
+                <input readonly="readonly" name="CalculatorResult" value="<?php echo $CalculatorResult; ?>"> <b>CalculatorResult</b>
+            </p>
+            <input type="submit" name="operator" value="Sum" />
+            <input type="submit" name="operator" value="Subtraction" />
+            <input type="submit" name="operator" value="Multiplication" />
+            <input type="submit" name="operator" value="Division" />
+        </form>
+    </div>
+
+<br>
+<form action="index.php" method="post">
+    E-mail: <input type="email" name="email"><br>
+    password: <input type="password" name="pass"><br>
+    <input type="submit">
+</form>
+<?php
+if (isset($_POST["email"]) && isset($_POST["pass"])) {
+    echo  "Your email address is : " . $_POST["email"] . "<br>";
+    echo  "Your password  is : " . $_POST["pass"] . "<br>";
+}
+?>
+
+<form action="index.php" method="post">
+    task : <input type="text" name="task"><br>
+    <input type="submit" value="ADD">
+</form>
+<?php
+if (isset($_POST["task"]) ) {
+    // array_push($allTask , $_POST["task$i"]);
+    addTask($_POST["task"]);
+
+}
+$allTaskTest = [];
+function addTask($value)
+{
+    static $allTask = [];
+    static $i=1;
+    array_push($allTask , $value);
+    // $allTask[$i] = $value;
+    echo "<pre>";
+    print_r($allTask);
+    echo "</pre>";
+    $i++;
+}
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>php task</title>
@@ -641,8 +728,8 @@ foreach ($cities as $country => $capital) {
 
 <?php
   class Calculator {
-    public $num1;
-    public $num2;
+    protected $num1;
+    protected $num2;
 
     public function __construct($num1,$num2)
     {
@@ -651,24 +738,25 @@ foreach ($cities as $country => $capital) {
     }
     public function add()
     {
-      return $num1+$num2;
+      return $this->num1+$this->num2;
     }
     public function subtract()
     {
-      return $num1-$num2;
+      return $this->num1-$this->num2;
     }
     public function multiply()
     {
-      return $num1*$num2;
+      return $this->num1*$this->num2;
     }
     public function divide()
     {
-      return $num1/$num2;
+      return $this->num1/$this->num2;
     }
   }
 
   $number = new  Calculator(12 , 6);
   echo $number->add();
+  echo "<br>"
 ?>
 
 <?php
@@ -733,4 +821,8 @@ foreach ($cities as $country => $capital) {
   removeDuplicates($array1);
 ?>
 </body>
+</html>
+
+</body>
+
 </html>
